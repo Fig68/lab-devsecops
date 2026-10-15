@@ -1,0 +1,28 @@
+name: CI Pipeline - Maria Comprida DevSecOps
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  auditar-projeto:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Baixar o código do repositório
+      uses: actions/checkout@v4
+
+    - name: Configurar o ambiente
+      run: |
+        echo "=== Iniciando Auditoria Automatizada na Nuvem ==="
+        ls -la
+
+    - name: Verificar integridade dos arquivos operacionais
+      run: |
+        if [ -f "organizador.ps1" ]; then
+          echo "[SUCESSO] Organizador encontrado!"
+        else
+          echo "[AVISO] Organizador não encontrado na raiz."
+        fi
