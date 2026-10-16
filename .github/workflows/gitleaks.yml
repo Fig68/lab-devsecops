@@ -1,0 +1,20 @@
+name: Gitleaks Security Scan
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  auditoria:
+    name: Procurar Segredos Vazados
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Executar Varredura Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
